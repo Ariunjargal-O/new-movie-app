@@ -42,7 +42,7 @@ export const MoreLike = () => {
               More like this
             </p>
 
-            <Link href={`/status/seeMore/${params.id}`}>
+            <Link href={`/status/seeMore/`}>
               <Button variant="outline" className="max-w-26 ">
                 <div className="flex">
                   <span className="text-sm not-italic font-medium leading-4">

@@ -51,7 +51,7 @@ export const NowPlayingList = () => {
                           className="w-full"
                           src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
                         />
-                        <div className="px-(--spacing-5) pt-(--spacing-5) flex flex-wrap justify-evenly">
+                        <div className="px-(--spacing-5) pt-(--spacing-5) flex flex-wrap">
                           <div className="flex w-full justify-between gap-[2px]">
                             <div className="flex flex-col">
                               {" "}
@@ -78,7 +78,7 @@ export const NowPlayingList = () => {
                           {/* <Link href={`/trailer/${movie.id}`}> */}{" "}
                           <Button className="mt-4">
                             {" "}
-                            <img src="icon-play.png" />
+                           <Play/>
                             Watch Trailer
                           </Button>
                           {/* </Link> */}

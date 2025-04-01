@@ -21,8 +21,6 @@ export const MovieList = () => {
   const [upcomingMovies, setUpcomingMovies] = useState([]);
   const [topRatedMovies, setTopRatedMovies] = useState([]);
   const [popularMovies, setPopularMovies] = useState([]);
-  const [genreMovies, setGenreMovies] = useState([]);
-const[moreLikeMovies, setMorelike] = useState([])
 
 
   const isMobileQuery = useMediaQuery({ maxWidth: 639 });
@@ -35,18 +33,17 @@ const[moreLikeMovies, setMorelike] = useState([])
   // console.log(params)
   const getMovies = async () => {
     try {
-      const [upcoming, topRated, popular, genre, moreLike] = await Promise.all([
+      const [upcoming, topRated, popular, genre, ] = await Promise.all([
         instance.get("/movie/upcoming"),
         instance.get("/movie/top_rated"),
         instance.get("/movie/popular"),
         instance.get("/genre/movie/list"),
-        instance.get( `/movie/${params.id}/similar?language=en-US&page=1`)
+  
       ]);
       setUpcomingMovies(upcoming.data.results);
       setTopRatedMovies(topRated.data.results);
       setPopularMovies(popular.data.results);
       setGenreMovies(genre.data.genres);
-      setMorelike(moreLike.data.results)
     } catch (error) {
       console.log(error);
     }
@@ -57,7 +54,7 @@ const[moreLikeMovies, setMorelike] = useState([])
   }, []);
 
   const details = {
-    titles: ["Upcoming", "TopRated", "Popular", "MoreLike"],
+    titles: ["Upcoming", "TopRated", "Popular",],
   };
 
   return (
@@ -144,7 +141,7 @@ const[moreLikeMovies, setMorelike] = useState([])
             if (title === "Upcoming") movieList = upcomingMovies;
             if (title === "TopRated") movieList = topRatedMovies;
             if (title === "Popular") movieList = popularMovies;
-            
+
             console.log(movieList);
             return (
               <div key={title}>

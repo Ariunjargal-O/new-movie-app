@@ -5,11 +5,20 @@
 import { instance } from "@/axios-instance/axios-instance";
 import { Button } from "@/components/ui/button";
 import { GenreType, MovieType } from "@/constnants/Type";
-
-
 import Link from "next/link";
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams,} from "next/navigation";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useSearchParams } from 'react-router-dom'
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination"
+
 
 // type MovieListPropsType = {
 //   setMovieList: Dispatch<SetStateAction<MovieType[]>>;
@@ -17,16 +26,19 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 // };
 
 const GenreMovieListPage = () => {
-const params = useParams();
-const searchParams = useSearchParams()
-// console.log(searchParams);
+  const params = useParams();
+  // const searchParams = useSearchParams()
+  // const genreName = searchParams.get('name')
+  const genreId = params.id
+  // console.log(genreName);
 
 
   const [genresMovieList, setGenresMovieList] = useState<GenreType[]>([]);
 
+
   const getGenresMovie = async () => {
     const genresMovie = await instance.get(
-      `/discover/movie?language=en&with_genres=${params.name}&page=${`1`}`
+      `/discover/movie?language=en&with_genres=${params.id}&page=${`1`}`
     );
     // console.log(genresMovie);
     setGenresMovieList(genresMovie.data.results);
@@ -38,7 +50,25 @@ const searchParams = useSearchParams()
 
   return (
     <div>
-    <p>{params.name}</p>
+      <h1 className="text-3xl font-bold mb-6 ">dfghjk{params.name}</h1>
+    
+      <Pagination>
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationPrevious href="#" />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink href="#">1</PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationEllipsis />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationNext href="#" />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
+
     </div>
   );
 };

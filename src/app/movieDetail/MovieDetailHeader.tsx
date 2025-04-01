@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { MovieDetailType } from "@/constnants/Type";
+import { MovieDetailType, MovieTrailerType } from "@/constnants/Type";
 import { instance } from "@/axios-instance/axios-instance";
 import { icons, Play } from "lucide-react";
 import { useMediaQuery } from "react-responsive";
-import { BASE_IMAGE_URL } from "@/constnants";
+import { BASE_IMAGE_URL, BASE_YOUTUBE_URL } from "@/constnants";
 
 export const MovieDetailHeader = () => {
   const [openMovieDetail, setopenMovieDetail] = useState<MovieDetailType>();
@@ -29,6 +29,24 @@ export const MovieDetailHeader = () => {
   useEffect(() => {
     setIsMobile(isMobileQuery);
   }, [isMobileQuery]);
+
+  const [trailer, setTrailer] = useState<MovieTrailerType[]>([]);
+  const getMovieTrailer = async () => {
+    const movieTrailer = await instance.get(
+      `/movie/${params.id}/videos?language=en-UÒ`
+    );
+    // console.log(movieTrailer);
+    setTrailer(movieTrailer.data.results);
+  };
+
+  useEffect(() => {
+    getMovieTrailer();
+  }, [params.id]);
+  
+
+  const officialTrailer = trailer.find(
+    (res) => res.type === "Trailer" && "Teaser" || res.name === "Official Trailer"
+  );
 
   return (
     <div>
@@ -67,13 +85,13 @@ export const MovieDetailHeader = () => {
               src={`https://image.tmdb.org/t/p/original/${openMovieDetail?.backdrop_path}`}
             ></img>
             <div className=" absolute flex justify-between bottom-3 left-3 gap-3 items-center">
+              <Link href={`${BASE_YOUTUBE_URL}${officialTrailer?.key}`}>
               <Button
                 className="bg-white border-[1px] border-black rounded-full hover:bg-indigo-400 w-10 h-10"
                 variant="outline"
               >
-                {/* <img className="w-6 h-6" src="icon-black-play.png"></img> */}
                 <Play />
-              </Button>
+              </Button></Link>
               <p className="text-[16px] not-italic font-bold leading-6 text-white ">
                 Play Trailer
               </p>
@@ -139,21 +157,23 @@ export const MovieDetailHeader = () => {
           </div>
 
           <div className="flex gap-8 mb-(--spacing-8)  ">
-            <img className="h-100"
-              src={`${BASE_IMAGE_URL}/w300${openMovieDetail?.poster_path}`}
+            <img className="w-full object-cover"
+              src={`${BASE_IMAGE_URL}/w200${openMovieDetail?.poster_path}`}
             />
             <div className="relative">
               <img
-                className="w-fit relative"
+                className="w-full h-full object-cover"
                 src={`https://image.tmdb.org/t/p/original/${openMovieDetail?.backdrop_path}`}
               />
               <div className="absolute flex justify-between left-10 bottom-5 gap-3 items-center">
+              <Link href={`${BASE_YOUTUBE_URL}${officialTrailer?.key}`}>
                 <Button
                 size="icon"
                   className="dark:bg-black rounded-full"
                   variant="outline">
                   <Play/>
                 </Button>
+                </Link>
                 <p className="text-[16px] not-italic font-bold leading-6 text-white ">
                   Play Trailer
                 </p>
@@ -163,14 +183,11 @@ export const MovieDetailHeader = () => {
           </div>
 
           <div className="flex gap-8 ">
-            <img
-              className="w-[100px] h-[179px]"
-              src={`https://image.tmdb.org/t/p/original/${openMovieDetail?.poster_path}`}
-            />
+           
             <div>
               <div className="flex flex-wrap gap-4">
                 {openMovieDetail?.genres.map((g) => (
-                  <Link href={`/status/${g.id}`} key={g.id}>
+                  <Link href={`/status/genre/${g.id}`} key={g.id}>
                     <div key={g.id} className="">
                       <Button 
                       variant={"outline"}
