@@ -33,6 +33,9 @@ export const GenresList = () => {
     setIsMobile(isMobileQuery);
   }, [isMobileQuery]);
   const { setTheme } = useTheme();
+
+// console.log(genresLists);
+
   return (
     <div>
         
@@ -44,9 +47,10 @@ export const GenresList = () => {
           <p className="text-base not-italic font-normal leading-6 border-b border-black dark:border-white">
             See lists of movies by genre
           </p>
+          
           {/* <hr className="my-4 border-t border-black"></hr> */}
           {genresLists.map((genre: GenreType) => (
-            <Link href={`/status/genre/${genre.id}`} key={genre.id}>
+            <Link href={`/status/genre/${genre.id}?name=${genre.name}`} key={genre.id}>
               <Button key={genre.id} variant="outline">
                 {genre.name}
                 <ChevronRight/>
@@ -65,7 +69,7 @@ export const GenresList = () => {
           </p>
           <hr className="my-4 border-t border-black"></hr>
           {genresLists.map((genre: GenreType) => (
-            <Link href={`/status/genre/${genre.id}`} key={genre.id}>
+            <Link href={`/status/genre/${genre.id}?name=${genre.name}`} key={genre.id}>
               <Button key={genre.id} variant="outline" className="">
                 {genre.name}
                 <ChevronRight />
