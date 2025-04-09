@@ -6,9 +6,9 @@ import { instance } from "@/axios-instance/axios-instance";
 import { Button } from "@/components/ui/button";
 import { GenreType, MovieType } from "@/constnants/Type";
 import Link from "next/link";
-import { useParams,} from "next/navigation";
+import { useParams, useSearchParams,} from "next/navigation";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { useSearchParams } from 'react-router-dom'
+
 import {
   Pagination,
   PaginationContent,
@@ -27,8 +27,8 @@ import {
 
 const GenreMovieListPage = () => {
   const params = useParams();
-  // const searchParams = useSearchParams()
-  // const genreName = searchParams.get('name')
+  const searchParams = useSearchParams()
+  const genreName = searchParams.get('name')
   const genreId = params.id
   // console.log(genreName);
 
@@ -50,7 +50,7 @@ const GenreMovieListPage = () => {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-6 ">dfghjk{params.name}</h1>
+      <h1 className="text-3xl font-bold mb-6 ">{genreName}</h1>
     
       <Pagination>
         <PaginationContent>

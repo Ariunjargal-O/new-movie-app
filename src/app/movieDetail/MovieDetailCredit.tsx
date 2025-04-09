@@ -48,8 +48,12 @@ export const MovieDetailCredit = () => {
                 {
                   movieCredit?.find(
                     (cast) => cast.known_for_department === "Directing"
+                  )?.name}
+                  {
+                  movieCreditCrew?.find(
+                    (crew) => crew.known_for_department === "Directing"
                   )?.name
-                }
+                } 
               </p>
             </div>
 
@@ -61,7 +65,7 @@ export const MovieDetailCredit = () => {
               <p className="text-[16px] not-italic font-normal leading-4">
                 {
                   movieCreditCrew?.find(
-                    (crew) => crew.known_for_department === ""
+                    (crew) => crew.known_for_department === "Writing"
                   )?.name
                 }
               </p>
