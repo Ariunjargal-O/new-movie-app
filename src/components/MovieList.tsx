@@ -43,7 +43,7 @@ export const MovieList = () => {
       setUpcomingMovies(upcoming.data.results);
       setTopRatedMovies(topRated.data.results);
       setPopularMovies(popular.data.results);
-      setGenreMovies(genre.data.genres);
+      // setGenreMovies(genre.data.genres);
     } catch (error) {
       console.log(error);
     }
