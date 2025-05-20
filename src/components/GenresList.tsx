@@ -50,7 +50,11 @@ export const GenresList = () => {
           
           {/* <hr className="my-4 border-t border-black"></hr> */}
           {genresLists.map((genre: GenreType) => (
+<<<<<<< HEAD
             <Link href={`/status/genre/${genre.id}?name=${genre.name}`} key={genre.id}>
+=======
+            <Link href={`/status/genre/${genre.id}?name=`} key={genre.id}>
+>>>>>>> b5ca413c3ebcdeeb72a825d037c37ddc7ce3cd8f
               <Button key={genre.id} variant="outline">
                 {genre.name}
                 <ChevronRight/>
@@ -66,7 +70,7 @@ export const GenresList = () => {
           </p>
           <p className="text-base not-italic font-normal leading-6 my-4 border-b border-black dark:border-white pb-2">
             See lists of movies by genre
-          </p>
+          </p>     
           <hr className="my-4 border-t border-black"></hr>
           {genresLists.map((genre: GenreType) => (
             <Link href={`/status/genre/${genre.id}?name=${genre.name}`} key={genre.id}>

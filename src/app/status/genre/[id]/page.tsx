@@ -4,7 +4,11 @@ import { instance } from "@/axios-instance/axios-instance";
 import { Button } from "@/components/ui/button";
 import { GenreType, MovieType } from "@/constnants/Type";
 import Link from "next/link";
+<<<<<<< HEAD
 import { useParams, useSearchParams } from "next/navigation";
+=======
+import { useParams, useSearchParams,} from "next/navigation";
+>>>>>>> b5ca413c3ebcdeeb72a825d037c37ddc7ce3cd8f
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 import {
@@ -29,9 +33,15 @@ import { useTheme } from "next-themes";
 
 const GenreMovieListPage = () => {
   const params = useParams();
+<<<<<<< HEAD
   const searchParams = useSearchParams();
   const genreName = searchParams.get("name");
   const genreId = params.id;
+=======
+  const searchParams = useSearchParams()
+  const genreName = searchParams.get('name')
+  const genreId = params.id
+>>>>>>> b5ca413c3ebcdeeb72a825d037c37ddc7ce3cd8f
   // console.log(genreName);
 
   const [genresMovieList, setGenresMovieList] = useState<MovieType[]>([]);
@@ -55,6 +65,7 @@ const GenreMovieListPage = () => {
 
   return (
     <div>
+<<<<<<< HEAD
       {isMobile && (
         <div>
           <p className="px-(--spacing-5)  w-full gap-(--spacing-5) flex justify-between text-2xl not-italic font-semibold leading-8">
@@ -159,6 +170,27 @@ const GenreMovieListPage = () => {
           </div>
         </div>
       )}
+=======
+      <h1 className="text-3xl font-bold mb-6 ">{genreName}</h1>
+    
+      <Pagination>
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationPrevious href="#" />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink href="#">1</PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationEllipsis />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationNext href="#" />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
+
+>>>>>>> b5ca413c3ebcdeeb72a825d037c37ddc7ce3cd8f
     </div>
   );
 };
